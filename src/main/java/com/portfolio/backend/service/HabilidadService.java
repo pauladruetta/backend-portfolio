@@ -2,6 +2,7 @@
 package com.portfolio.backend.service;
 
 import com.portfolio.backend.model.Habilidad;
+//import com.portfolio.backend.model.Proyecto;
 import com.portfolio.backend.repository.HabilidadRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

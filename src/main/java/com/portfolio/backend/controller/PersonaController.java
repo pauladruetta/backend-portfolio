@@ -3,6 +3,7 @@ package com.portfolio.backend.controller;
 
 import com.portfolio.backend.model.Persona;
 import com.portfolio.backend.service.IPersonaService;
+import java.sql.Blob;
 import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +32,11 @@ public class PersonaController {
     @PostMapping("/new")
     public void agregarPersona (@RequestBody Persona pers) {
         personaServ.crearPersona(pers);
+    }
+    
+    @PostMapping("/image-upload")
+    public void agregarImagen (@RequestBody Blob img) {
+        personaServ.agregarImagen(img);
     }
     
     @GetMapping ("/ver-todas")

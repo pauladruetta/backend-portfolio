@@ -37,6 +37,12 @@ public class ProyectoController {
         return proyectoServ.verProyectos();
     }
     
+    @GetMapping ("/{id}")
+    @ResponseBody
+    public Proyecto buscarProyecto(@PathVariable Long id) {
+        return proyectoServ.buscarProyecto(id);
+    }
+    
     @PutMapping ("/edit")
     public void editarProyecto (@RequestBody Proyecto proy) {
         proyectoServ.editarProyecto(proy);
