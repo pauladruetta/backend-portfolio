@@ -4,6 +4,7 @@ package com.portfolio.backend.controller;
 import com.portfolio.backend.model.Experiencia;
 import com.portfolio.backend.service.IExperienciaService;
 import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,7 @@ public class ExperienciaController {
         this.experienciaServ = experienciaServ;
     }
       
-     
+    @PreAuthorize("hasRole('ADMIN')")     
     @PostMapping("/new")
     public void agregarExperiencia (@RequestBody Experiencia exp) {
         experienciaServ.crearExperiencia(exp); 
@@ -45,11 +46,13 @@ public class ExperienciaController {
         return experienciaServ.buscarExperiencia(id);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")    
     @PutMapping ("/edit")
     public void editarExperiencia (@RequestBody Experiencia exp) {
         experienciaServ.editarExperiencia(exp);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")   
     @DeleteMapping ("/delete/{id}")
     public void borrarExperiencia (@PathVariable Long id) {
         experienciaServ.borrarExperiencia(id);

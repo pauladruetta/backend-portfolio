@@ -7,6 +7,7 @@ import java.net.URI;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class HabilidadController {
         this.habilidadServ = habilidadServ;
     }
       
-     
+    @PreAuthorize("hasRole('ADMIN')")     
     @PostMapping("/new")
     public void agregarHabilidad (@RequestBody Habilidad hab) {
         habilidadServ.crearHabilidad(hab); 
@@ -56,11 +57,13 @@ public class HabilidadController {
         return habilidadServ.buscarHabilidad(id);
     }
     
+    @PreAuthorize("hasRole('ADMIN')") 
     @PutMapping ("/edit")
     public void editarHabilidad (@RequestBody Habilidad hab) {
         habilidadServ.editarHabilidad(hab);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/delete/{id}")
     public void borrarHabilidad (@PathVariable Long id) {
         habilidadServ.borrarHabilidad(id);

@@ -4,6 +4,7 @@ package com.portfolio.backend.controller;
 import com.portfolio.backend.model.Educacion;
 import com.portfolio.backend.service.IEducacionService;
 import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +26,13 @@ public class EducacionController {
     public EducacionController(IEducacionService educacionService) {
         this.educacionServ = educacionService;
     }
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/new")
     public void agregarEducacion (@RequestBody Educacion edu) {
         educacionServ.crearEducacion(edu); 
     }
     
+    @PreAuthorize("hasRole('ADMIN')")    
     @PutMapping ("/edit")
     public void editarEducacion (@RequestBody Educacion edu) {
         educacionServ.editarEducacion(edu);
@@ -48,6 +50,7 @@ public class EducacionController {
         return educacionServ.buscarEducacion(id);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")    
     @DeleteMapping ("/delete/{id}")
     public void borrarEducacion (@PathVariable Long id) {
         educacionServ.borrarEducacion(id);
