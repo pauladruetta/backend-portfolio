@@ -16,12 +16,12 @@ public class JwtDto {
 
     private String nombreUsuario;
 
-    private Collection<? extends GrantedAuthority> autthorities;
+    private Collection<? extends GrantedAuthority> authorities;
 
-    public JwtDto(String token, String nombreUsuario, Collection<? extends GrantedAuthority> autthorities) {
+    public JwtDto(String token, String nombreUsuario, Collection<? extends GrantedAuthority> authorities) {
         this.token = token;
         this.nombreUsuario = nombreUsuario;
-        this.autthorities = autthorities;
+        this.authorities = authorities;
     }
 
 

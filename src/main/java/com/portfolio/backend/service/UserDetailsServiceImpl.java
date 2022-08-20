@@ -4,7 +4,7 @@ package com.portfolio.backend.service;
 import com.portfolio.backend.model.Usuario;
 import com.portfolio.backend.model.UsuarioPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,7 +23,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         
         Usuario usuario = usuarioService.getByNombreUsuario(nombreUsuario).get();
         
-        System.out.println(usuario);
+               
+        System.out.println("Usuario: " + usuario);
         
         return UsuarioPrincipal.build(usuario);
  // return new User (usuario.getNombreUsuario(),usuario.getPassword(),usuario.getRoles());
