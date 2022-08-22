@@ -32,13 +32,13 @@ public class PersonaController {
         this.personaServ = personaServ;
     }        
    
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/new")
     public void agregarPersona (@RequestBody Persona pers) {
         personaServ.crearPersona(pers);
     }
     
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/image-upload")
     public void agregarImagen (@RequestBody Blob img) {
         personaServ.agregarImagen(img);
@@ -47,17 +47,16 @@ public class PersonaController {
     @GetMapping ("/ver-todas")
     @ResponseBody
     public List<Persona> verPersonas() {
-        System.out.println("com.portfolio.backend.controller.PersonaController.verPersonas()");
         return personaServ.verPersonas();
     }
     
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/edit")
     public void editarPersona (@RequestBody Persona pers) {
         personaServ.editarPersona(pers);
     }
     
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/delete/{id}")
     public void borrarPersona (@PathVariable Long id) {
         personaServ.borrarPersona(id);

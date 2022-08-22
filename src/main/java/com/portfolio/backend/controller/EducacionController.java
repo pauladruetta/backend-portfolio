@@ -28,13 +28,13 @@ public class EducacionController {
     public EducacionController(IEducacionService educacionService) {
         this.educacionServ = educacionService;
     }
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/new")
     public void agregarEducacion (@RequestBody Educacion edu) {
         educacionServ.crearEducacion(edu); 
     }
     
-    //@PreAuthorize("hasRole('ADMIN')")    
+    @PreAuthorize("hasRole('ADMIN')")    
     @PutMapping ("/edit")
     public void editarEducacion (@RequestBody Educacion edu) {
         educacionServ.editarEducacion(edu);
@@ -52,7 +52,7 @@ public class EducacionController {
         return educacionServ.buscarEducacion(id);
     }
     
-    //@PreAuthorize("hasRole('ADMIN')")    
+    @PreAuthorize("hasRole('ADMIN')")    
     @DeleteMapping ("/delete/{id}")
     public void borrarEducacion (@PathVariable Long id) {
         educacionServ.borrarEducacion(id);
