@@ -5,6 +5,8 @@ package com.portfolio.backend.security;
 import com.portfolio.backend.jwt.JwtEntryPoint;
 import com.portfolio.backend.jwt.JwtTokenFilter;
 import com.portfolio.backend.service.UserDetailsServiceImpl;
+import java.util.Arrays;
+import java.util.List;
 import static lombok.AccessLevel.PUBLIC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -44,9 +47,17 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                .authorizeHttpRequests()
-                .antMatchers("/auth/**").permitAll()        
+        
+        http.cors().configurationSource(request -> {
+            CorsConfiguration cors = new CorsConfiguration();
+            cors.setAllowedOrigins(Arrays.asList("*"));
+            cors.setAllowedMethods(Arrays.asList("*"));
+            cors.setAllowedHeaders(Arrays.asList("*"));
+            return cors;
+        });
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/auth/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/persona/ver-todas").permitAll() 
                 .antMatchers(HttpMethod.GET,"/educacion/ver-todas").permitAll() 
                 .antMatchers(HttpMethod.GET,"/experiencia/ver-todas").permitAll() 
@@ -59,7 +70,25 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
 //        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-                        
+        
+        
+        
+//        http.cors().and().csrf().disable()
+//                .authorizeHttpRequests()
+//                .antMatchers("/auth/**").permitAll()        
+//                .antMatchers(HttpMethod.GET,"/persona/ver-todas").permitAll() 
+//                .antMatchers(HttpMethod.GET,"/educacion/ver-todas").permitAll() 
+//                .antMatchers(HttpMethod.GET,"/experiencia/ver-todas").permitAll() 
+//                .antMatchers(HttpMethod.GET,"/proyecto/ver-todos").permitAll() 
+//                .antMatchers(HttpMethod.GET,"/habilidad/ver-todas").permitAll() 
+//                .anyRequest().authenticated()
+//                .and()
+//                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
+//                .and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
+////        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//                        
     }
 
     @Override
