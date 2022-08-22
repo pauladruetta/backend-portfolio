@@ -48,13 +48,13 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         
-        http.cors().configurationSource(request -> {
-            CorsConfiguration cors = new CorsConfiguration();
-            cors.setAllowedOrigins(Arrays.asList("*"));
-            cors.setAllowedMethods(Arrays.asList("*"));
-            cors.setAllowedHeaders(Arrays.asList("*"));
-            return cors;
-        });
+//        http.cors().configurationSource(request -> {
+//            CorsConfiguration cors = new CorsConfiguration();
+//            cors.setAllowedOrigins(Arrays.asList("*"));
+//            cors.setAllowedMethods(Arrays.asList("*"));
+//            cors.setAllowedHeaders(Arrays.asList("*"));
+//            return cors;
+//        });
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
