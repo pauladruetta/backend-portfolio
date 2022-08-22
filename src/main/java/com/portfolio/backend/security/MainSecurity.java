@@ -24,64 +24,45 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
-//@Configuration
-//@EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-//public class MainSecurity extends WebSecurityConfigurerAdapter {
-//    
-//    @Autowired
-//    UserDetailsServiceImpl userDetailsService;
-//        
-//    @Autowired
-//    JwtEntryPoint jwtEntryPoint;
-//    
-//    @Bean
-//    public JwtTokenFilter jwtTokenFilter() {
-//        return new JwtTokenFilter();
-//    }
-//    
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        
-////        http.cors().configurationSource(request -> {
-////            CorsConfiguration cors = new CorsConfiguration();
-////            cors.setAllowedOrigins(Arrays.asList("*"));
-////            cors.setAllowedMethods(Arrays.asList("*"));
-////            cors.setAllowedHeaders(Arrays.asList("*"));
-////            return cors;
-////        });
-////        http.csrf().disable()
-////                .authorizeRequests()
-////                .antMatchers("/auth/**").permitAll()
-////                .antMatchers(HttpMethod.GET,"/persona/ver-todas").permitAll() 
-////                .antMatchers(HttpMethod.GET,"/educacion/ver-todas").permitAll() 
-////                .antMatchers(HttpMethod.GET,"/experiencia/ver-todas").permitAll() 
-////                .antMatchers(HttpMethod.GET,"/proyecto/ver-todos").permitAll() 
-////                .antMatchers(HttpMethod.GET,"/habilidad/ver-todas").permitAll() 
-////                .anyRequest().authenticated()
-////                .and()
-////                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
-////                .and()
-////                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
-//////        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-////        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-//        
-//        
-//        
-//        http.cors().and().csrf().disable()
-//                .authorizeHttpRequests()
-////                .antMatchers("/auth/*").permitAll()    
-//                .antMatchers("**").permitAll()    
-////                .antMatchers(HttpMethod.GET,"/persona/ver-todas").permitAll() 
-////                .antMatchers(HttpMethod.GET,"/educacion/ver-todas").permitAll() 
-////                .antMatchers(HttpMethod.GET,"/experiencia/ver-todas").permitAll() 
-////                .antMatchers(HttpMethod.GET,"/proyecto/ver-todos").permitAll() 
-////                .antMatchers(HttpMethod.GET,"/habilidad/ver-todas").permitAll() 
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class MainSecurity extends WebSecurityConfigurerAdapter {
+    
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+        
+    @Autowired
+    JwtEntryPoint jwtEntryPoint;
+    
+    @Bean
+    public JwtTokenFilter jwtTokenFilter() {
+        return new JwtTokenFilter();
+    }
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        
+//        http.cors().configurationSource(request -> {
+//            CorsConfiguration cors = new CorsConfiguration();
+//            cors.setAllowedOrigins(Arrays.asList("*"));
+//            cors.setAllowedMethods(Arrays.asList("*"));
+//            cors.setAllowedHeaders(Arrays.asList("*"));
+//            return cors;
+//        });
+//        http.csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/auth/**").permitAll()
+//                .antMatchers(HttpMethod.GET,"/persona/ver-todas").permitAll() 
+//                .antMatchers(HttpMethod.GET,"/educacion/ver-todas").permitAll() 
+//                .antMatchers(HttpMethod.GET,"/experiencia/ver-todas").permitAll() 
+//                .antMatchers(HttpMethod.GET,"/proyecto/ver-todos").permitAll() 
+//                .antMatchers(HttpMethod.GET,"/habilidad/ver-todas").permitAll() 
 //                .anyRequest().authenticated()
 //                .and()
 //                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
@@ -89,22 +70,41 @@ import org.springframework.web.cors.CorsConfiguration;
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
 ////        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 //        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-////                        
-//    }
-//
-//    @Override
-//    protected AuthenticationManager authenticationManager() throws Exception {
-//        return super.authenticationManager(); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Bean
-//    @Override
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean(); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-//    }
-//}
+        
+        
+        
+        http.cors().and().csrf().disable()
+                .authorizeHttpRequests()
+                .antMatchers("/auth/*").permitAll()    
+//                .antMatchers("**").permitAll()    
+                .antMatchers(HttpMethod.GET,"/persona/ver-todas").permitAll() 
+                .antMatchers(HttpMethod.GET,"/educacion/ver-todas").permitAll() 
+                .antMatchers(HttpMethod.GET,"/experiencia/ver-todas").permitAll() 
+                .antMatchers(HttpMethod.GET,"/proyecto/ver-todos").permitAll() 
+                .antMatchers(HttpMethod.GET,"/habilidad/ver-todas").permitAll() 
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
+//        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//                        
+    }
+
+    @Override
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+}
