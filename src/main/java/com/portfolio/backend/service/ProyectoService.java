@@ -1,5 +1,6 @@
 package com.portfolio.backend.service;
 
+import com.portfolio.backend.model.Habilidad;
 import com.portfolio.backend.model.Proyecto;
 import com.portfolio.backend.repository.ProyectoRepository;
 import java.util.List;
@@ -19,6 +20,7 @@ public class ProyectoService implements IProyectoService{
 
     @Override
     public void crearProyecto(Proyecto proy) {
+        //Habilidad habilidad = HabilidadService.buscarHabilidad(habilidad_id);
         proyectRepository.save(proy);
     }
 

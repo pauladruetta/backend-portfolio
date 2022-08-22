@@ -3,6 +3,7 @@ package com.portfolio.backend.service;
 
 import com.portfolio.backend.model.Persona;
 import com.portfolio.backend.repository.PersonaRepository;
+import java.sql.Blob;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,11 @@ public class PersonaService  implements IPersonaService{
     @Override
     public void editarPersona(Persona pers) {
         persoRepo.save(pers);
+    }
+
+    @Override
+    public void agregarImagen(Blob img) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
