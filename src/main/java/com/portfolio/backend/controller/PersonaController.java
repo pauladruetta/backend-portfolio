@@ -47,6 +47,7 @@ public class PersonaController {
     @GetMapping ("/ver-todas")
     @ResponseBody
     public List<Persona> verPersonas() {
+        System.err.println("Está llamanda a personas");
         return personaServ.verPersonas();
     }
     
