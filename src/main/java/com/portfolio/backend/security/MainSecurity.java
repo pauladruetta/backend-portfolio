@@ -55,27 +55,9 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 //            cors.setAllowedHeaders(Arrays.asList("*"));
 //            return cors;
 //        });
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/persona/ver-todas").permitAll() 
-                .antMatchers(HttpMethod.GET,"/educacion/ver-todas").permitAll() 
-                .antMatchers(HttpMethod.GET,"/experiencia/ver-todas").permitAll() 
-                .antMatchers(HttpMethod.GET,"/proyecto/ver-todos").permitAll() 
-                .antMatchers(HttpMethod.GET,"/habilidad/ver-todas").permitAll() 
-                .anyRequest().authenticated()
-                .and()
-                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
-//        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        
-        
-        
-//        http.cors().and().csrf().disable()
-//                .authorizeHttpRequests()
-//                .antMatchers("/auth/**").permitAll()        
+//        http.csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/auth/**").permitAll()
 //                .antMatchers(HttpMethod.GET,"/persona/ver-todas").permitAll() 
 //                .antMatchers(HttpMethod.GET,"/educacion/ver-todas").permitAll() 
 //                .antMatchers(HttpMethod.GET,"/experiencia/ver-todas").permitAll() 
@@ -88,6 +70,24 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
 ////        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 //        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        
+        
+        
+        http.cors().and().csrf().disable()
+                .authorizeHttpRequests()
+                .antMatchers("/auth/**").permitAll()        
+                .antMatchers(HttpMethod.GET,"/persona/ver-todas").permitAll() 
+                .antMatchers(HttpMethod.GET,"/educacion/ver-todas").permitAll() 
+                .antMatchers(HttpMethod.GET,"/experiencia/ver-todas").permitAll() 
+                .antMatchers(HttpMethod.GET,"/proyecto/ver-todos").permitAll() 
+                .antMatchers(HttpMethod.GET,"/habilidad/ver-todas").permitAll() 
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
+//        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 //                        
     }
 
