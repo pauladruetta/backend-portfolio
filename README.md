@@ -20,7 +20,7 @@ El archivo de propiedades del back (application.properties) se encuentra sólo e
 /* server.port=8282 */`
 ~~~
 
-![Modelo Base de Datos][https://drive.google.com/file/d/1VD8oSrijJxIVisDYRYED6saHng5DtoXw/view?usp=sharing]
+![img](https://drive.google.com/file/d/1VD8oSrijJxIVisDYRYED6saHng5DtoXw/view?usp=sharing)
 
 
 ## Security
