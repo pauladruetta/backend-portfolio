@@ -20,7 +20,7 @@ El archivo de propiedades del back (application.properties) se encuentra sólo e
 /* server.port=8282 */`
 ~~~
 
-![img](https://github.com/pauladruetta/backend-portfolio/desarrollo/ModelBD.png)
+![Esquema Base de datos](https://github.com/pauladruetta/backend-portfolio/blob/main/ModelBD.png)
 
 
 ## Security
