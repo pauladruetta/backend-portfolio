@@ -52,6 +52,7 @@ public class UsuarioController {
     @Autowired        
     JwtProvider jwtProvider;
 
+        
     @PreAuthorize("hasRole('ADMIN')")
     //para crear el primer usuario desabilitar
     @PostMapping("/newUser")
