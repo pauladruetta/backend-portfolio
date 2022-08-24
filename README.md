@@ -20,8 +20,13 @@ El archivo de propiedades del back (application.properties) se encuentra sólo e
 /* server.port=8282 */`
 ~~~
 
+![[nombre de la imagen](https://drive.google.com/file/d/1VD8oSrijJxIVisDYRYED6saHng5DtoXw/view?usp=sharing)][Modelo Base de Datos]
+
+
 ## Security
 ~~~
  jwt.secret = 
  wt.expiration = 
 ~~~
+
+
