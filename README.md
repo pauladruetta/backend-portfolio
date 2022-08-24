@@ -1,15 +1,61 @@
 # backend-portfolio
+
 Este repositorio corresponde a la API de mi portfolio, la misma fue realizada para el curso de Argentina Programa #YoProgramo.
 
-[Link al repositorio de la API](https://github.com/pauladruetta/frontendPortfolio)
+El frontend del portfolio se puede consultar en este link:
+[Link al repositorio del frontend](https://github.com/pauladruetta/frontendPortfolio)
 
-[ ] Explicar características de la API
-[ ] End points
-[ ] JWT
+## End points
 
-El archivo de propiedades del back (application.properties) se encuentra sólo en el repositorio local. MEdiate el gitignore se elimina del repositorio remoto por seguridad (inforamción sensible), las variables del mismo se implementan directamente en Heroku.
+ Esta api cuenta con los siguientes end points:
+ 
+ * /persona
+   - /new
+   - /edit
+   - /delete
+   - /ver-todas
+   - /delete/{id}
+ * /auth
+   - /newUser
+   - /login
+ * /educacion
+   - /{id}
+   - /new
+   - /edit
+   - /delete
+   - /ver-todas
+   - /delete/{id}
+ * /proyecto
+   - /{id}
+   - /new
+   - /edit
+   - /delete
+   - /ver-todos
+   - /delete/{id}
+ * /experiencia
+   - /{id}
+   - /new
+   - /edit
+   - /delete
+   - /ver-todas
+   - /delete/{id}
+ * /habilidad
+   - /{id}
+   - /new
+   - /edit
+   - /delete
+   - /ver-todas
+   - /delete/{id}
 
-## DATA BASE
+
+## JWT
+
+Esta api tiene implementada autenticación con JSON Web Token (JWT) y cuenta con dos tipos de roles de usuario, USER y ADMIN, con diferentes posibilidades de acceso a los diferentes end points.
+
+## Propiedades
+El archivo de propiedades del back (application.properties) se encuentra sólo en el repositorio local. Mediante el archivo gitignore, se elimina el archivo de propiedades del repositorio remoto, esto se realiza por cuestiones de seguridad (ya que es inforamción sensible), las variables del mismo se implementan directamente en Heroku.
+
+### DATA BASE
 ~~~
  #spring.datasource.url = jdbc:mysql://
  #spring.datasource.username=
@@ -22,7 +68,7 @@ El archivo de propiedades del back (application.properties) se encuentra sólo e
 /* server.port=8282 */`
 ~~~
 
-## Security
+### Security
 ~~~
  jwt.secret = 
  wt.expiration = 
