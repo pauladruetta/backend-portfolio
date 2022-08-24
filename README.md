@@ -7,6 +7,7 @@ Backend del portfolio para Argentina Programa
 
 El archivo de propiedades del back (application.properties) se encuentra sólo en el repositorio local. MEdiate el gitignore se elimina del repositorio remoto por seguridad (inforamción sensible), las variables del mismo se implementan directamente en Heroku.
 
+## DATA BASE
 ~~~
  #spring.datasource.url = jdbc:mysql://
  #spring.datasource.username=
@@ -19,7 +20,7 @@ El archivo de propiedades del back (application.properties) se encuentra sólo e
 /* server.port=8282 */`
 ~~~
 
-# Security
+## Security
 ~~~
  jwt.secret = 
  wt.expiration = 
