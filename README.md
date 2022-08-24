@@ -1,5 +1,7 @@
 # backend-portfolio
-Backend del portfolio para Argentina Programa
+Este repositorio corresponde a la API de mi portfolio, la misma fue realizada para el curso de Argentina Programa #YoProgramo.
+
+[Link al repositorio de la API](https://github.com/pauladruetta/frontendPortfolio)
 
 [ ] Explicar características de la API
 [ ] End points
@@ -20,13 +22,12 @@ El archivo de propiedades del back (application.properties) se encuentra sólo e
 /* server.port=8282 */`
 ~~~
 
-![Esquema Base de datos](https://github.com/pauladruetta/backend-portfolio/blob/main/ModelBD.png)
-
-
 ## Security
 ~~~
  jwt.secret = 
  wt.expiration = 
 ~~~
 
+## Esquema Base de datos
 
+![Esquema Base de datos](https://github.com/pauladruetta/backend-portfolio/blob/main/ModelBD.png)
