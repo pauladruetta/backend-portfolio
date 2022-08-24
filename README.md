@@ -1,9 +1,9 @@
 # backend-portfolio
 Backend del portfolio para Argentina Programa
 
-[] Explicar características de la API
-[] End points
-[] JWT
+[ ] Explicar características de la API
+[ ] End points
+[ ] JWT
 
 El archivo de propiedades del back (application.properties) se encuentra sólo en el repositorio local. MEdiate el gitignore se elimina del repositorio remoto por seguridad (inforamción sensible), las variables del mismo se implementan directamente en Heroku.
 
