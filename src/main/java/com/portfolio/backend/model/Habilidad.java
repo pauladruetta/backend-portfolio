@@ -48,4 +48,9 @@ public class Habilidad {
     
 //    @ManyToMany(mappedBy = "habilidades")
 //    private Set<Proyecto> proyectos;
+
+    public Habilidad(String nombre, long porcentaje) {
+        this.nombre = nombre;
+        this.porcentaje = porcentaje;
+    }
 }

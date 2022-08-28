@@ -48,10 +48,22 @@ public class Proyecto {
     @ManyToMany(cascade = {
             CascadeType.MERGE
     })
+//    @ManyToMany()
     @JoinTable(
         name = "proyecto_habilidad",
         joinColumns = {@JoinColumn(name = "proyecto_id")},
         inverseJoinColumns = {@JoinColumn(name = "habilidad_id")}
     )
     private Set<Habilidad> habilidades;
+
+    public Proyecto(String titulo, String descripcion, String url, long fecha, String imagen, Set<Habilidad> habilidades) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.url = url;
+        this.fecha = fecha;
+        this.imagen = imagen;
+        this.habilidades = habilidades;
+    }
+    
+    
 }
