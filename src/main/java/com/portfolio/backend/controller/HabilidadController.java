@@ -22,7 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/habilidad")
 //@CrossOrigin(origins = "http://localhost:4200", allowedHeaders="*")
-@CrossOrigin(origins = "https://frontendap-c120f.web.app")
+//@CrossOrigin(origins = "https://frontendap-c120f.web.app")
+@CrossOrigin(origins ={"http://localhost:4200", "https://frontendap-c120f.web.app"})
 public class HabilidadController {
 
     private final IHabilidadService habilidadServ;
@@ -56,6 +57,12 @@ public class HabilidadController {
     @ResponseBody
     public Habilidad buscarHabilidad(@PathVariable Long id) {
         return habilidadServ.buscarHabilidad(id);
+    }
+    
+    @GetMapping ("buscar/{nombre}")
+    @ResponseBody
+    public Habilidad buscarHabilidadNombre(@PathVariable String nombre) {
+        return habilidadServ.buscarHabilidadNombre(nombre);
     }
     
     @PreAuthorize("hasRole('ADMIN')") 

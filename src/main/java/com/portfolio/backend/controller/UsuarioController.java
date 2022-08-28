@@ -34,7 +34,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 //@CrossOrigin(origins = "http://localhost:4200", allowedHeaders="*")
-@CrossOrigin(origins = "https://frontendap-c120f.web.app")
+//@CrossOrigin(origins = "https://frontendap-c120f.web.app")
+@CrossOrigin(origins ={"http://localhost:4200", "https://frontendap-c120f.web.app"})
 public class UsuarioController {
 
     @Autowired
@@ -52,6 +53,7 @@ public class UsuarioController {
     @Autowired        
     JwtProvider jwtProvider;
 
+        
     @PreAuthorize("hasRole('ADMIN')")
     //para crear el primer usuario desabilitar
     @PostMapping("/newUser")
