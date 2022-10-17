@@ -37,4 +37,9 @@ public class EducacionService implements IEducacionService{
     public void editarEducacion(Educacion edu) {
         EduRepo.save(edu);
     }
+
+    @Override
+    public List<Educacion> buscarPorPersona(Long id) {
+        return EduRepo.findAllByPersonaId(id);
+    }
 }

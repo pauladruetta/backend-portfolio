@@ -2,11 +2,13 @@
 package com.portfolio.backend.controller;
 
 import com.portfolio.backend.model.Habilidad;
+import com.portfolio.backend.model.HabilidadPersona;
+import com.portfolio.backend.service.HabilidadPersonaService;
 import com.portfolio.backend.service.IHabilidadService;
-import java.net.URI;
+import com.portfolio.backend.service.PersonaService;
 import java.util.List;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.Set;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +29,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class HabilidadController {
 
     private final IHabilidadService habilidadServ;
+    
+    @Autowired    
+    PersonaService perServ;
+    
+    @Autowired    
+    HabilidadPersonaService habPerServ;
 
     public HabilidadController(IHabilidadService habilidadServ) {
         this.habilidadServ = habilidadServ;
@@ -69,6 +77,12 @@ public class HabilidadController {
     @PutMapping ("/edit")
     public void editarHabilidad (@RequestBody Habilidad hab) {
         habilidadServ.editarHabilidad(hab);
+    }
+    
+    @GetMapping ("/persona/{id}")
+    @ResponseBody
+    public List<HabilidadPersona> buscarPorPersona(@PathVariable Long id) {
+        return habPerServ.buscarHabilidadesPersona(id);
     }
     
     @PreAuthorize("hasRole('ADMIN')")

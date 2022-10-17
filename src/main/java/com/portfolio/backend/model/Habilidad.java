@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 //import javax.persistence.OneToOne;
 //import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,9 +31,13 @@ public class Habilidad {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @NotNull
     private String nombre;
-    private long porcentaje;
+    //private long porcentaje;
     
+//    @ManyToOne
+//    @JoinColumn(name="persona_id")
+//    private Persona persona;
    //@OneToMany (mappedBy = "habilidad", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //private Set<Proyecto> proyectos;
     
@@ -49,8 +54,8 @@ public class Habilidad {
 //    @ManyToMany(mappedBy = "habilidades")
 //    private Set<Proyecto> proyectos;
 
-    public Habilidad(String nombre, long porcentaje) {
+    public Habilidad(String nombre) {
         this.nombre = nombre;
-        this.porcentaje = porcentaje;
+        //this.porcentaje = porcentaje;
     }
 }

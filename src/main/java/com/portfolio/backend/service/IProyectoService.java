@@ -10,9 +10,8 @@ public interface IProyectoService {
     
     public List<ProyectoNuevo> verProyectos ();
     public void crearProyecto (Proyecto proy);
-    //public void crearProyecto (Proyecto proy);
     public void borrarProyecto (Long id);
     public Proyecto buscarProyecto (Long id);
     public void editarProyecto(Proyecto proy);
-    
+    public List<ProyectoNuevo> buscarPorPersona(Long id);
 }

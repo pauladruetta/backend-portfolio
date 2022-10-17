@@ -1,6 +1,7 @@
 
 package com.portfolio.backend.controller;
 
+import antlr.StringUtils;
 import com.portfolio.backend.dto.Mensaje;
 import com.portfolio.backend.model.Habilidad;
 import com.portfolio.backend.model.HabilidadNueva;
@@ -10,7 +11,6 @@ import com.portfolio.backend.service.HabilidadService;
 import com.portfolio.backend.service.IProyectoService;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +46,12 @@ public class ProyectoController {
         this.proyectoServ = proyectoServ;
     }        
 
-    @PreAuthorize("hasRole('ADMIN')")
+   // @PreAuthorize("hasRole('ADMIN')")
 //    @PostMapping("/new")
 //    public void agregarProyecto(@RequestBody Proyecto proy) {
 //        proyectoServ.crearProyecto(proy);
 //    }
-    
+    @PreAuthorize("hasRole('ADMIN')") 
     @PostMapping("/new")
 //    public void agregarProyecto(@RequestBody ProyectoNuevo proyecto) {
       public ResponseEntity<?> agregarProyecto (@Valid @RequestBody ProyectoNuevo proyecto, BindingResult bindingResult) {
@@ -64,34 +64,38 @@ public class ProyectoController {
         Set<Habilidad> habProy = new HashSet<>();
         
         //List<Habilidad> habilidadesGuardadas = habServ.verHabilidades();
-        
-        proyecto.getHabilidades().forEach((habNombre)-> {
-            System.out.println(habNombre);
-            HabilidadNueva habNueva;            
-            Habilidad hab;
-            
-            if (habServ.existsByHabilidadNombre(habNombre)) {
-                System.out.println("Habilidad ya existe");                
-                hab = habServ.buscarHabilidadNombre(habNombre);
-            } else {
-                habNueva = new HabilidadNueva(habNombre,20);
-                    hab = 
-                        new Habilidad(habNueva.getNombre(), habNueva.getPorcentaje());
-                    habServ.crearHabilidad(hab);
-                    System.out.println("Habilidad Guardada");
-            }
+        if (proyecto.getHabilidades().isEmpty()) {
+            System.out.println("el proyecto no tiene habilidades");
+        } else {
+            proyecto.getHabilidades().forEach((habNombre)-> {
+                System.out.println(habNombre);
+                Habilidad habNueva;            
+                Habilidad hab;
 
-            habProy.add(hab);                
+                if (habServ.existsByHabilidadNombre(habNombre)) {
+                    System.out.println("Habilidad ya existe");                
+                    hab = habServ.buscarHabilidadNombre(habNombre);
+                    System.out.println(hab.getId());  
+                } else {
+                    habNueva = new Habilidad(habNombre);
+                        hab = 
+                            new Habilidad(habNueva.getNombre());
+                        habServ.crearHabilidad(hab);
+                        System.out.println("Habilidad Guardada");
+                }
 
-        }  );   
-        
-        habProy.forEach((hab) -> {
-            System.out.println(hab.getNombre());
-        });
-        
+                habProy.add(hab);  
+                //También habría que sumarla a la persona a la que pertenece el proyecto
+
+            }  );   
+            habProy.forEach((hab) -> {
+                System.out.println(hab.getNombre());
+            });
+        }     
+
         
         Proyecto proy =
-                new Proyecto(proyecto.getTitulo(), proyecto.getDescripcion(), proyecto.getUrl(), proyecto.getFecha(), proyecto.getImagen(), habProy);
+                new Proyecto(proyecto.getTitulo(), proyecto.getDescripcion(), proyecto.getUrl(), proyecto.getFecha(), proyecto.getImagen(), proyecto.getPersona(), habProy);
 
         //habProy.add(habServ.buscarHabilidadByName(proyecto.getHabilidades().name));  
 
@@ -124,11 +128,19 @@ public class ProyectoController {
         }  );   
     
         ProyectoNuevo proy =
-            new ProyectoNuevo(proyecto.getId(),proyecto.getTitulo(), proyecto.getDescripcion(), proyecto.getUrl(), proyecto.getFecha(), proyecto.getImagen(), habProy);
+            new ProyectoNuevo(proyecto.getId(),proyecto.getTitulo(), proyecto.getDescripcion(), proyecto.getUrl(), proyecto.getFecha(), proyecto.getImagen(),
+                    proyecto.getPersona(), habProy);
         
         return proy;
     }
 
+        
+    @GetMapping ("/persona/{id}")
+    @ResponseBody
+    public List<ProyectoNuevo> buscarPorPersona(@PathVariable Long id) {
+        return proyectoServ.buscarPorPersona(id);
+    }
+    
     @PreAuthorize("hasRole('ADMIN')")    
     @PutMapping ("/edit")
 //    public void editarProyecto (@RequestBody Proyecto proy) {
@@ -145,16 +157,16 @@ public class ProyectoController {
         
         proyecto.getHabilidades().forEach((habNombre)-> {
             System.out.println(habNombre);
-            HabilidadNueva habNueva;            
+            Habilidad habNueva;            
             Habilidad hab;
             
             if (habServ.existsByHabilidadNombre(habNombre)) {
                 System.out.println("Habilidad ya existe");                
                 hab = habServ.buscarHabilidadNombre(habNombre);
             } else {
-                habNueva = new HabilidadNueva(habNombre,20);
+                habNueva = new Habilidad(habNombre);
                     hab = 
-                        new Habilidad(habNueva.getNombre(), habNueva.getPorcentaje());
+                        new Habilidad(habNueva.getNombre());
                     habServ.crearHabilidad(hab);
                     System.out.println("Habilidad Guardada");
             }
@@ -166,7 +178,8 @@ public class ProyectoController {
         });
     
         Proyecto proy =
-                new Proyecto(proyecto.getId(),proyecto.getTitulo(), proyecto.getDescripcion(), proyecto.getUrl(), proyecto.getFecha(), proyecto.getImagen(), habProy);
+                new Proyecto(proyecto.getId(),proyecto.getTitulo(), proyecto.getDescripcion(), proyecto.getUrl(), proyecto.getFecha(),
+                        proyecto.getImagen(), proyecto.getPersona(), habProy);
         
         proyectoServ.editarProyecto(proy);
         return new ResponseEntity(new Mensaje("proyecto Editado"), HttpStatus.CREATED);

@@ -1,29 +1,28 @@
-package com.portfolio.backend.model;
 
-//import java.text.ParseException;
-//import java.text.SimpleDateFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+package com.portfolio.backend.dto;
+
+import com.portfolio.backend.model.Educacion;
+import com.portfolio.backend.model.Experiencia;
+import com.portfolio.backend.model.Habilidad;
+import com.portfolio.backend.model.HabilidadNueva;
+import com.portfolio.backend.model.Proyecto;
 import java.time.LocalDate;
 import java.util.Set;
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter @Setter
-@Entity
-public class Persona {
+public class PersonaDTO {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,14 +34,16 @@ public class Persona {
     
     @NotNull
     @Size(min = 1, max = 50, message = "no cumple con la longitud")
-    private String apellido;    
+    private String apellido;
+    
     private String titulo;
+
     private LocalDate fecha_nacimiento;
     
     @NotNull
     @Size(min = 1, max = 50, message = "no cumple con la longitud")
     private String imagen_perfil;
-    private String imagen_portada;    
+    private String imagen_portada;  
     private String descripcion;
     
 //    @ManyToMany(cascade = {
@@ -53,8 +54,8 @@ public class Persona {
 //        joinColumns = {@JoinColumn(name = "persona_id")},
 //        inverseJoinColumns = {@JoinColumn(name = "habilidad_id")}
 //    )
-//    private Set<Habilidad> habilidades;
-//   
+    private Set<HabilidadNueva> habilidades;
+   
 //    @ManyToMany(cascade = {
 //        CascadeType.MERGE
 //    })
@@ -63,7 +64,7 @@ public class Persona {
 //        joinColumns = {@JoinColumn(name = "persona_id")},
 //        inverseJoinColumns = {@JoinColumn(name = "proyecto_id")}
 //    )
-//    private Set<Proyecto> proyectos;
+    private Set<Proyecto> proyectos;
     
 //    @ManyToMany(cascade = {
 //        CascadeType.MERGE
@@ -73,14 +74,8 @@ public class Persona {
 //        joinColumns = {@JoinColumn(name = "persona_id")},
 //        inverseJoinColumns = {@JoinColumn(name = "experiencia_id")}
 //    )
-//    private Set<Experiencia> experiencias; 
-//    
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy ="persona", cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-//    private Set<Experiencia> experiencias;    
-    //@JsonIgnore 
-    //@JsonManagedReference
-
-        
+    private Set<Experiencia> experiencias; 
+    
 //    @ManyToMany(cascade = {
 //        CascadeType.MERGE
 //    })
@@ -89,35 +84,12 @@ public class Persona {
 //        joinColumns = {@JoinColumn(name = "persona_id")},
 //        inverseJoinColumns = {@JoinColumn(name = "educacion_id")}
 //    )
-//    private Set<Educacion> educaciones;  
-    
-    public Persona() {
-        
+    private Set<Educacion> educaciones;  
+
+    public PersonaDTO() {
     }
 
-//    public void setFecha_nacimiento(String fecha_nacimiento) {
-//
-//        try {
-//            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-//            this.fecha_nacimiento = formato.parse(fecha_nacimiento);
-//        } catch (ParseException ex) {
-//            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
-
-//
-//    public Persona(String nombre, String apellido, String titulo, LocalDate fecha_nacimiento, String imagen_perfil, String imagen_portada, String descripcion) {
-//        this.nombre = nombre;
-//        this.apellido = apellido;
-//        this.titulo = titulo;
-//        this.fecha_nacimiento = fecha_nacimiento;
-//        this.imagen_perfil = imagen_perfil;
-//        this.imagen_portada = imagen_portada;
-//        this.descripcion = descripcion;
-//    }
-
-    public Persona(String nombre, String apellido, String titulo, LocalDate fecha_nacimiento, String imagen_perfil, String imagen_portada, String descripcion) {
+    public PersonaDTO(String nombre, String apellido, String titulo, LocalDate fecha_nacimiento, String imagen_perfil, String imagen_portada, String descripcion, Set<HabilidadNueva> habilidades, Set<Proyecto> proyectos, Set<Experiencia> experiencias, Set<Educacion> educaciones) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.titulo = titulo;
@@ -125,7 +97,11 @@ public class Persona {
         this.imagen_perfil = imagen_perfil;
         this.imagen_portada = imagen_portada;
         this.descripcion = descripcion;
+        this.habilidades = habilidades;
+        this.proyectos = proyectos;
+        this.experiencias = experiencias;
+        this.educaciones = educaciones;
     }
-
-   
+    
+       
 }

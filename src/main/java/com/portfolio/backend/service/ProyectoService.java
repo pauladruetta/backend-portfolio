@@ -29,7 +29,8 @@ public class ProyectoService implements IProyectoService{
             proy.getHabilidades().forEach((hab) -> {
               habilidades.add(hab.getNombre());
             });      
-            ProyectoNuevo nuevoProy = new ProyectoNuevo(proy.getId(), proy.getTitulo(), proy.getDescripcion(), proy.getUrl(), proy.getFecha(), proy.getImagen(), habilidades);
+            ProyectoNuevo nuevoProy = new ProyectoNuevo(proy.getId(), proy.getTitulo(), proy.getDescripcion(), proy.getUrl(), proy.getFecha(), proy.getImagen(),
+            proy.getPersona(), habilidades);
             proyectos.add(nuevoProy);
         });
         
@@ -68,4 +69,22 @@ public class ProyectoService implements IProyectoService{
         proyectRepository.save(proy);
     }
     
+    @Override
+    public List<ProyectoNuevo> buscarPorPersona(Long id) {
+        //return proyectRepository.findAllByPersonaId(id);
+    //}
+        List<ProyectoNuevo> proyectos = new ArrayList<ProyectoNuevo>(); 
+        
+        proyectRepository.findAllByPersonaId(id).forEach((proy) -> {
+            Set<String> habilidades = new HashSet<String>(); 
+            proy.getHabilidades().forEach((hab) -> {
+              habilidades.add(hab.getNombre());
+            });      
+            ProyectoNuevo nuevoProy = new ProyectoNuevo(proy.getId(), proy.getTitulo(), proy.getDescripcion(), proy.getUrl(), proy.getFecha(), proy.getImagen(),
+            proy.getPersona(), habilidades);
+            proyectos.add(nuevoProy);
+        });
+        
+        return proyectos;
+    }
 }

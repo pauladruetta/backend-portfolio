@@ -53,6 +53,12 @@ public class EducacionController {
         return educacionServ.buscarEducacion(id);
     }
     
+    @GetMapping ("/persona/{id}")
+    @ResponseBody
+    public List<Educacion> buscarPorPersona(@PathVariable Long id) {
+        return educacionServ.buscarPorPersona(id);
+    }
+    
     @PreAuthorize("hasRole('ADMIN')")    
     @DeleteMapping ("/delete/{id}")
     public void borrarEducacion (@PathVariable Long id) {
