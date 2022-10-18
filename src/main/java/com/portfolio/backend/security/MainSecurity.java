@@ -5,9 +5,6 @@ package com.portfolio.backend.security;
 import com.portfolio.backend.jwt.JwtEntryPoint;
 import com.portfolio.backend.jwt.JwtTokenFilter;
 import com.portfolio.backend.service.UserDetailsServiceImpl;
-import java.util.Arrays;
-import java.util.List;
-import static lombok.AccessLevel.PUBLIC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +19,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
+
 
 @Configuration
 @EnableWebSecurity
