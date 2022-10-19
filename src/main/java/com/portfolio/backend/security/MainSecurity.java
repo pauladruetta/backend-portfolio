@@ -5,9 +5,6 @@ package com.portfolio.backend.security;
 import com.portfolio.backend.jwt.JwtEntryPoint;
 import com.portfolio.backend.jwt.JwtTokenFilter;
 import com.portfolio.backend.service.UserDetailsServiceImpl;
-import java.util.Arrays;
-import java.util.List;
-import static lombok.AccessLevel.PUBLIC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +19,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
+
 
 @Configuration
 @EnableWebSecurity
@@ -75,13 +72,26 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
         
         http.cors().and().csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/auth/**").permitAll()    
-//                .antMatchers("**").permitAll()    
+                .antMatchers("/auth/*").permitAll()    
+                //.antMatchers("**").permitAll()  
+                .antMatchers("/swagger-ui/*").permitAll() 
+                .antMatchers(HttpMethod.GET,"/v3/api-docs").permitAll() 
+                .antMatchers(HttpMethod.GET,"/v3/api-docs/*").permitAll() 
                 .antMatchers(HttpMethod.GET,"/persona/ver-todas").permitAll() 
+                .antMatchers(HttpMethod.GET,"/persona/personal-info/*").permitAll() 
+                .antMatchers(HttpMethod.GET,"/persona/details/*").permitAll() 
                 .antMatchers(HttpMethod.GET,"/educacion/ver-todas").permitAll() 
+                .antMatchers(HttpMethod.GET,"/educacion/persona/*").permitAll() 
                 .antMatchers(HttpMethod.GET,"/experiencia/ver-todas").permitAll() 
-                .antMatchers(HttpMethod.GET,"/proyecto/ver-todos").permitAll() 
+                .antMatchers(HttpMethod.GET,"/experiencia/persona/*").permitAll() 
+                .antMatchers(HttpMethod.GET,"/proyecto/ver-todos").permitAll()
+                .antMatchers(HttpMethod.GET,"/proyecto/persona/*").permitAll()
                 .antMatchers(HttpMethod.GET,"/habilidad/ver-todas").permitAll() 
+                .antMatchers(HttpMethod.GET,"/habilidadPersona/ver-todas").permitAll() 
+                .antMatchers(HttpMethod.GET,"/habilidadPersona/persona/*").permitAll() 
+                .antMatchers(HttpMethod.GET,"/habilidadPersona/noPersona/*").permitAll() 
+                
+                //.antMatchers(HttpMethod.GET,"/habilidad/persona/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)

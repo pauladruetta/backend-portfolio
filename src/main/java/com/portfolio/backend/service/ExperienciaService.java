@@ -37,5 +37,10 @@ public class ExperienciaService implements IExperienciaService{
     public void editarExperiencia(Experiencia exp) {
         ExpeRepo.save(exp);
     }
+
+    @Override
+    public List<Experiencia> buscarPorPersona(Long id) {
+        return ExpeRepo.findAllByPersonaId(id);
+    }
 }
 

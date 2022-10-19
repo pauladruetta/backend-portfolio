@@ -3,7 +3,6 @@ package com.portfolio.backend.service;
 
 import com.portfolio.backend.model.Habilidad;
 import java.util.List;
-import java.util.Optional;
 
 
 public interface IHabilidadService  {
@@ -15,5 +14,5 @@ public interface IHabilidadService  {
     public boolean existsByHabilidadNombre (String nombre);
     public Habilidad buscarHabilidad (Long id);
     public void editarHabilidad (Habilidad exp);
-
+//    public List<Habilidad> buscarPorPersona(Long id);
 }
