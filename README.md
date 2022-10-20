@@ -7,45 +7,54 @@ El frontend del portfolio se puede consultar en este link:
 
 ## End points
 
- Esta api cuenta con los siguientes end points:
+ Esta api cuenta con los siguientes end points(para mayor claridad ver: [Link a Swagger UI](https://back-portfolionan.herokuapp.com/swagger-ui/index.html ):
  
  * /persona
    - /new
-   - /edit
-   - /delete
+   - /edit/{id}
    - /ver-todas
    - /delete/{id}
+   - /personal-info/{id}
+   - /details/{id}
  * /auth
    - /newUser
    - /login
  * /educacion
    - /{id}
    - /new
-   - /edit
-   - /delete
+   - /edit/{id}
    - /ver-todas
    - /delete/{id}
+   - /persona/{id}
  * /proyecto
    - /{id}
    - /new
-   - /edit
-   - /delete
+   - /edit/{id}
    - /ver-todos
    - /delete/{id}
+   - /persona/{id}
  * /experiencia
    - /{id}
    - /new
-   - /edit
-   - /delete
+   - /edit/{id}
    - /ver-todas
    - /delete/{id}
+   - /persona/{id}
  * /habilidad
    - /{id}
    - /new
-   - /edit
-   - /delete
+   - /edit/{id}
    - /ver-todas
    - /delete/{id}
+   - /persona/{id}
+ * /habilidadPersona
+   - /{id}
+   - /new
+   - /edit/{id}
+   - /ver-todas
+   - /delete/{id}
+   - /persona/{idPersona}
+   - /noPersona/{idPersona}
 
 
 ## JWT
