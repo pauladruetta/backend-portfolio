@@ -5,10 +5,14 @@ import antlr.StringUtils;
 import com.portfolio.backend.dto.Mensaje;
 import com.portfolio.backend.model.Habilidad;
 import com.portfolio.backend.model.HabilidadNueva;
+import com.portfolio.backend.model.HabilidadPersona;
+import com.portfolio.backend.model.HabilidadPersonaNueva;
 import com.portfolio.backend.model.Proyecto;
 import com.portfolio.backend.model.ProyectoNuevo;
+import com.portfolio.backend.service.HabilidadPersonaService;
 import com.portfolio.backend.service.HabilidadService;
 import com.portfolio.backend.service.IProyectoService;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,6 +44,9 @@ public class ProyectoController {
     
     @Autowired    
     HabilidadService habServ;
+        
+    @Autowired    
+    HabilidadPersonaService perServ;
     
         
     public ProyectoController(IProyectoService proyectoServ) {
@@ -71,6 +78,8 @@ public class ProyectoController {
                 System.out.println(habNombre);
                 Habilidad habNueva;            
                 Habilidad hab;
+                HabilidadPersona habPNueva; 
+                int existe = 0;
 
                 if (habServ.existsByHabilidadNombre(habNombre)) {
                     System.out.println("Habilidad ya existe");                
@@ -85,9 +94,32 @@ public class ProyectoController {
                 }
 
                 habProy.add(hab);  
-                //También habría que sumarla a la persona a la que pertenece el proyecto
-
+                //También tiene que sumarla a la persona a la que pertenece el proyecto
+                List<Habilidad> habilidadesPer = new ArrayList();
+                try {
+                    habilidadesPer = perServ.buscarHabilidadesdePersona(proyecto.getPersona().getId());
+                }
+                catch(Exception error){
+                    System.err.println(error);
+                }
+                System.out.println("HAbilidades persona");
+                System.out.println(habilidadesPer);
+                for (Habilidad habil: habilidadesPer){
+                   System.out.println(habil);
+                    if (habil.getNombre() == null ? habNombre == null : habil.getNombre().equals(habNombre)) {
+                       existe = 1;
+                   }
+                }
+             
+                if (existe>0) {
+                    System.out.println("Habilidad ya existe en persona");                
+                } else {
+                    habPNueva = new HabilidadPersona(proyecto.getPersona(),hab,20);
+                    perServ.crearHabilidadPersona(habPNueva);
+                    System.out.println("Habilidad Guardada en Persona");
+                }
             }  );   
+            
             habProy.forEach((hab) -> {
                 System.out.println(hab.getNombre());
             });
@@ -158,7 +190,9 @@ public class ProyectoController {
         proyecto.getHabilidades().forEach((habNombre)-> {
             System.out.println(habNombre);
             Habilidad habNueva;            
+            HabilidadPersona habPNueva; 
             Habilidad hab;
+            int existe = 0;
             
             if (habServ.existsByHabilidadNombre(habNombre)) {
                 System.out.println("Habilidad ya existe");                
@@ -168,9 +202,37 @@ public class ProyectoController {
                     hab = 
                         new Habilidad(habNueva.getNombre());
                     habServ.crearHabilidad(hab);
-                    System.out.println("Habilidad Guardada");
+                    System.out.println("Habilidad Creada");
             }
-            habProy.add(hab);                
+            habProy.add(hab);  
+            List<Habilidad> habilidadesPer = new ArrayList();
+            try {
+                habilidadesPer = perServ.buscarHabilidadesdePersona(proyecto.getPersona().getId());
+            }
+            catch(Exception error){
+                System.err.println(error);
+            }
+            System.out.println("Habilidades persona");
+            System.out.println(habilidadesPer);
+             for (Habilidad habil: habilidadesPer){
+                System.out.println(habil);
+                 if (habil.getNombre() == null ? habNombre == null : habil.getNombre().equals(habNombre)) {
+                    existe = 1;
+                }
+             }
+//             habilidadesPer.forEach((habil) -> {
+//                 if (habil.getNombre() == null ? habNombre == null : habil.getNombre().equals(habNombre)) {
+//                     existe = 1;
+//                 }
+//             });
+             
+            if (existe>0) {
+                System.out.println("Habilidad ya existe en persona");                
+            } else {
+                habPNueva = new HabilidadPersona(proyecto.getPersona(),hab,20);
+                perServ.crearHabilidadPersona(habPNueva);
+                System.out.println("Habilidad Guardada en Persona");
+            }
         }  );   
         
         habProy.forEach((hab) -> {

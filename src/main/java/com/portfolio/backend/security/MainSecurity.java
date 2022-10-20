@@ -89,9 +89,8 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/habilidad/ver-todas").permitAll() 
                 .antMatchers(HttpMethod.GET,"/habilidadPersona/ver-todas").permitAll() 
                 .antMatchers(HttpMethod.GET,"/habilidadPersona/persona/*").permitAll() 
-                .antMatchers(HttpMethod.GET,"/habilidadPersona/noPersona/*").permitAll() 
-                
-                //.antMatchers(HttpMethod.GET,"/habilidad/persona/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/habilidadPersona/noPersona/*").permitAll()                 
+                .antMatchers(HttpMethod.GET,"/habilidad/persona/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)

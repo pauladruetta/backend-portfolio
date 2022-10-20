@@ -83,23 +83,29 @@ public class HabilidadPersonaController {
         return habilPerServ.buscarHabilidadesPersona(idPersona);
     }
     
+//    @GetMapping ("/noPersona/{idPersona}")
+//    @ResponseBody
+//    public List<Habilidad> buscarHabilidadesNoPersona(@PathVariable Long idPersona) {
+//        List<Habilidad> habil =  habServ.verHabilidades();
+//        List<HabilidadPersona> habilP =  habilPerServ.buscarHabilidadesPersona(idPersona);
+//         List<HabilidadPersona> filtradas;
+//         //filtradas = habil;
+//         habilP.forEach((habP) -> {
+////            habil.forEach((hab) -> {
+////            if(habP.getHabilidad().getNombre() == hab.getNombre()){
+////                habil.remove(hab);
+////                System.out.println(habil);
+////            }
+//            habil.remove(habP.getHabilidad());
+//         //});
+//         });
+//         return habil;
+//    }
+    
     @GetMapping ("/noPersona/{idPersona}")
     @ResponseBody
     public List<Habilidad> buscarHabilidadesNoPersona(@PathVariable Long idPersona) {
-        List<Habilidad> habil =  habServ.verHabilidades();
-        List<HabilidadPersona> habilP =  habilPerServ.buscarHabilidadesPersona(idPersona);
-         List<HabilidadPersona> filtradas;
-         //filtradas = habil;
-         habilP.forEach((habP) -> {
-//            habil.forEach((hab) -> {
-//            if(habP.getHabilidad().getNombre() == hab.getNombre()){
-//                habil.remove(hab);
-//                System.out.println(habil);
-//            }
-            habil.remove(habP.getHabilidad());
-         //});
-         });
-         return habil;
+        return habilPerServ.buscarHabilidadesdePersona(idPersona);
     }
     
 //    @GetMapping ("buscar/{nombre}")

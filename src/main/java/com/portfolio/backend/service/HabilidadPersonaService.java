@@ -1,6 +1,7 @@
 
 package com.portfolio.backend.service;
 
+import com.portfolio.backend.model.Habilidad;
 import com.portfolio.backend.model.HabilidadNueva;
 import com.portfolio.backend.model.HabilidadPersona;
 import com.portfolio.backend.repository.HabilidadPersonaRepository;
@@ -58,5 +59,15 @@ public class HabilidadPersonaService implements IHabilidadPersonaService {
         });      
         return habilidadesPersona; 
     }
-
+    
+    @Override
+    public List<Habilidad> buscarHabilidadesdePersona(Long id) {
+        
+        List<Habilidad> habilidadesPersona = new ArrayList<Habilidad>(); 
+        
+        habilperRepo.findAllByPersonaId(id).forEach((habP) -> {
+            habilidadesPersona.add(habP.getHabilidad());
+        });      
+        return habilidadesPersona; 
+    }
 }
