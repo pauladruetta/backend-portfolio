@@ -55,6 +55,7 @@ public class UsuarioController {
 
         
     //@PreAuthorize("hasRole('ADMIN')")
+    //
     //para crear el primer usuario desabilitar
     @PostMapping("/newUser")
     public ResponseEntity<?> nuevo (@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
