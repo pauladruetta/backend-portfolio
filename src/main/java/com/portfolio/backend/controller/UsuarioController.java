@@ -74,6 +74,8 @@ public class UsuarioController {
         System.out.println("usuario: " + usuario);
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
+        System.out.println("roles: " + roles);
+        System.out.println("usuario: " + nuevoUsuario.getRoles());
         if (nuevoUsuario.getRoles().contains("admin"))
             System.out.println("usuario admin");
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
